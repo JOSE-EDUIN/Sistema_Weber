@@ -15,7 +15,7 @@ class configuracion():
         '''
                 
         self.ventana = Toplevel()
-        self.ventana.title("Configuración")
+        self.ventana.title("Sistema Weber: Configuración")
         centrar_pantalla(self.ventana, 500, 900)
         # barra_menu(self.ventana)
           # Establecimiento de la conexión a la base de datos

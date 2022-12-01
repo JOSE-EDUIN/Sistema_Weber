@@ -54,8 +54,10 @@ class extraccion():
             # self.datos = urllib.request.urlopen("https://www.dof.gob.mx/index_111.php?year=2022&month=10&day=11#gsc.tab=0").read().decode()
                
         except urllib.error.URLError as e:
+            self.monitoreo.gif_error_web()
             print(f"Error al intentar acceder a la pagina web: {e}")
-            # self.monitoreo.gif_cargando2()
+            # print("cosa por error web")
+            
         else:
             print("Conexión a la página web establecida")
             self.monitoreo.gif_cargando()
@@ -68,6 +70,7 @@ class extraccion():
         try:
             self.conn_bd = conexion_bd()
         except:
+            self.monitoreo.gif_error_bd()
             print("error en establecer conexion bd en dof")
         else:
             print("conexion bd en dof")
@@ -92,6 +95,7 @@ class extraccion():
             self.transforma = ", ".join(map(str, self.palabra))
             self.conteo = len(self.transforma.split())
         except:
+            self.monitoreo.gif_error_busqueda_publicacion()
             print("Error en busqueda de palabra clave")
         else:
             print("Buscando palabra clave")
@@ -138,6 +142,7 @@ class extraccion():
             
             
         except:
+            self.monitoreo.gif_error_extraer_link()
             print("Error al extraer links")
             
         else:
@@ -180,7 +185,8 @@ class extraccion():
             # Convertimos la lista de los links nuevos en cadena de texto
             self.str_pubs_nva = ", \n ".join(self.lst_nva_pub2)
         except:
-            pass
+            self.monitoreo.gif_error_enviar_link()
+            print("Error al intentar insertar el link")            
         else:
             print("Links enviados a la base de datos")
             self.monitoreo.gif_cargando5()
@@ -234,6 +240,7 @@ class extraccion():
                 server.quit()
                     
         except smtplib.SMTPException as e:
+            self.monitoreo.gif_error_envio_correo()
             print ('Error al intentar enviar el correo electronico, cuasa del error: ', e)
         else:
             print('Correo electronico enviado con exito')

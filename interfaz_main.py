@@ -8,8 +8,8 @@ from centrarPantalla import centrar_pantalla
 def main():
     gui = tk.Tk()
     
-    gui.title("Weber")
-    gui.iconbitmap("img/scrapy.ico")
+    gui.title("Sistema Weber")
+    gui.iconbitmap("img/weberIcon.ico")
     # gui.geometry('700x500')
     gui.resizable(0,0)
     
@@ -19,7 +19,7 @@ def main():
     menu.barra_menu(gui, app)
     
     # monitoreo = frame_monitoreo(gui= gui)
-    centrar_pantalla(gui, 500, 700)
+    centrar_pantalla(gui, 500, 725)
     
     gui.mainloop()
     

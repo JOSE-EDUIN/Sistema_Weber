@@ -7,11 +7,13 @@ from gui.pruebaframe import frame_monitoreo
 from Base_datos_scrapper import conexion_bd
 from gui.gui_configuraciones import configuracion
 import time
+from PIL import ImageTk, Image
 
 class menu_barra():
     
     def __init__(self):
         self.configuracion_ventana = None
+        self.monitoreo = frame_monitoreo()
     
     def archivo_nuevo_presionado(self):
         '''
@@ -19,7 +21,22 @@ class menu_barra():
         '''
         self.configuracion_ventana = configuracion()
         
+    def mostrar_logo(self, gui):
+        '''
+        Funcion para llamar el logo en ejecutar servicio
+        '''
+        label_vacio=Label(gui, text="")
+        label_vacio.grid(row=0, column=0)
+        fondo=Image.open("img/WeberPrincipal.jpeg")
+        fondo=fondo.resize((550,475), Image.ANTIALIAS)
         
+        img_fondo=ImageTk.PhotoImage(fondo)
+        fondo_principal=Label(gui, image=img_fondo)
+        fondo_principal.grid(row=0, column=1)
+        
+    
+    def quit_frame(self):
+        self.monitoreo.destroy()
         
     def servicio(self, gui):
         '''
@@ -43,8 +60,8 @@ class menu_barra():
         menu_opciones = tk.Menu(barra_menu, tearoff= 0)
         barra_menu.add_cascade(label = "Opciones", menu = menu_opciones)
         menu_opciones.add_command(
-            label = "Ejecutar Servicio" #,
-            # command= self.servicio(gui)   
+            label = "Ejecutar Servicio"#,
+            # command= lambda:[self.quit_frame()]
         )
         menu_opciones.add_command(
             label="Configuración del Weber",
@@ -80,8 +97,15 @@ class frame_botones (tk.Frame):
         self.grid(row=0, column=0)
         # self.config(width="25", height="500")
         
+        self.fondo=Image.open("img/WeberPrincipal.jpeg")
+        self.fondo=self.fondo.resize((550,475), Image.ANTIALIAS)
+        
+        self.img_fondo=ImageTk.PhotoImage(self.fondo)
+        self.fondo_principal=Label(self.gui, image=self.img_fondo)
+        self.fondo_principal.grid(row=0, column=1)
         # self.panel_procesos()
         self.botones()
+        
 
         self.extraction = extraccion()
     # def panel_procesos(self):
@@ -94,38 +118,41 @@ class frame_botones (tk.Frame):
         '''
         Función para llamar a los procesos en ejecucion
         '''
-       
-        frame_monitoreo(gui= self.gui)
-        # try:
+        self.fondo_principal.destroy()
+        app=frame_monitoreo(gui= self.gui)
+        try:
             
-        self.extraction = extraccion()
-        self.extraction.acceso_web()
-            # conn_bd = conexion_bd()
-        self.extraction.conn_bd()
-        self.extraction.buscar_69b()
-        self.extraction.obtener_link()
-        self.extraction.validar_pub_nva()
-        self.extraction.notificacion_correo()
-        # except:
-        #     print("Error al finalizar el proceso ")
-        # else:
-        #     extraction.monitoreo.gif_cargando7()
-        return True
+            self.extraction = extraccion()
+            self.extraction.acceso_web()
+                # conn_bd = conexion_bd()
+            self.extraction.conn_bd()
+            self.extraction.buscar_69b()
+            self.extraction.obtener_link()
+            self.extraction.validar_pub_nva()
+            self.extraction.notificacion_correo()
+        except:
+            self.extraction.monitoreo.gif_error_fin_proceso()
+            print("Error al finalizar el proceso ")
+        else:
+            print("proceso terminado")
+            # self.extraction.monitoreo.gif_cargando7()
+            # self.extraction.monitoreo.aceptar_resultados(app)
+        # return True
     
     def Proceso_finalizado(self):
         
         if self.procesos() == True:
             self.extraction.monitoreo.gif_cargando7()
         
-        if self.procesos() == False:
-           self.extraction.monitoreo.gif_cargando8() 
+        # if self.procesos() == False:
+        #    self.extraction.monitoreo.gif_cargando8() 
            
     def botones(self):
         '''
         Función que define los botones para ejecutar los procesos completos del weber 
         '''
         
-        self.btn_ejecutar = tk.Button(self, text="Ejecutar Servicio", command= lambda:[self.Proceso_finalizado()])
+        self.btn_ejecutar = tk.Button(self, text="Ejecutar Servicio", command= lambda:[self.procesos()])
         self.btn_ejecutar.grid(column=0, row=0, padx=5, pady=200)    
         self.btn_ejecutar.configure(font=("Bahnschrift SemiBold", 10), bg="PeachPuff2") 
         
