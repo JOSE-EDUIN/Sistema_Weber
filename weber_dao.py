@@ -10,15 +10,16 @@ class manipulacion_db():
         '''
         Función que hace la consulta de los links existentes en la Base de datos
         '''
-        
+        # print ("entro en consulta link")
         conexion = conexion_bd()  
         conexion.cursor.execute("SELECT * FROM `extraccion` WHERE link = %s;", (lst_link_dominio[cont_link_dominio],))
         self.valores = conexion.cursor.fetchall()
             # Si no encuentra coincidencia del link en la base de datos se considera nueva y se almacena en una nueva lista
         if bool(self.valores) == False:
                 lst_nva_pub.append(lst_link_dominio[cont_link_dominio])
-
+                print("paso en if de consulta de link")
         conexion.close_connection() 
+        
         return lst_nva_pub
             
 
@@ -30,6 +31,7 @@ class manipulacion_db():
         self.today = today
         self.cont_liga = cont_liga
         conexion = conexion_bd()  
+        print("Entro en insertar link")
         conexion.cursor.execute("INSERT INTO `extraccion` (`id`, `link`, `fecha`) VALUES (NULL,%(liga)s, %(fecha_actual)s)",{"liga":self.lst_nva_pub[self.cont_liga],"fecha_actual":self.today}) 
         print("estoy aqui")
         print("link= "+self.lst_nva_pub[self.cont_liga])

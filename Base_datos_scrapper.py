@@ -19,9 +19,7 @@ class conexion_bd():
         except mysql.connector.Error as e:
             print("No puedo conectar a la base de datos:",e)
         else:
-            print("Se establecio la conexion a bd")
-            # extraction.monitoreo.gif_cargando2()
-            # monitoreo.gif_cargando2()
+            print("Conexion exitosa a BD")
 
     def close_connection(self):
         '''
@@ -31,7 +29,7 @@ class conexion_bd():
         self.conexion.close()
         
         print('Conexión a la base de datos cerrada exitosamente')
-        print("Proceso finalizado")
+        # print("Proceso finalizado")
     
     
     def commit_connection(self):

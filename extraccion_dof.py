@@ -40,6 +40,8 @@ class extraccion():
        self.lst_nva_pub2=[]
        self.monitoreo = frame_monitoreo()
        self.manipulacionDb = manipulacion_db()
+       self.keyword = ''
+       self.conteo = 0
 
     def acceso_web(self):
         '''
@@ -55,12 +57,14 @@ class extraccion():
                
         except urllib.error.URLError as e:
             self.monitoreo.gif_error_web()
+            self.monitoreo.gif_error_fin_proceso()
             print(f"Error al intentar acceder a la pagina web: {e}")
             # print("cosa por error web")
             
         else:
             print("Conexión a la página web establecida")
             self.monitoreo.gif_cargando()
+            self.monitoreo.gif_cargando7()
             
     
     def conn_bd(self):
@@ -71,6 +75,7 @@ class extraccion():
             self.conn_bd = conexion_bd()
         except:
             self.monitoreo.gif_error_bd()
+            self.monitoreo.gif_error_fin_proceso()
             print("error en establecer conexion bd en dof")
         else:
             print("conexion bd en dof")
@@ -87,15 +92,18 @@ class extraccion():
             self.soup = BeautifulSoup(self.datos, 'lxml')
             self.box = self.soup.find('tr',id="trcontent")
             self.resultado = self.box.find_all('a',class_='enlaces')
-            self.palabra = re.findall(r'69-B', str(self.resultado))
+            self.keyword = manipulacion_db.palabra_usada()
+            self.palabra = re.findall(self.keyword, str(self.resultado))
+            # self.palabra = re.findall(r'69-B', str(self.resultado))
             
             print(self.palabra)
             
             #Contar elementos
             self.transforma = ", ".join(map(str, self.palabra))
-            self.conteo = len(self.transforma.split())
+            # self.conteo = len(self.transforma.split())
         except:
             self.monitoreo.gif_error_busqueda_publicacion()
+            self.monitoreo.gif_error_fin_proceso()
             print("Error en busqueda de palabra clave")
         else:
             print("Buscando palabra clave")
@@ -109,46 +117,51 @@ class extraccion():
         clave
         '''
         
-        try:
+        # try:
             #Recupera todos los link de las publicaciones y las almacena en una lista -links[]
-            self.lst_links =[]
-            self.lst_69B =[]
-            lst_link_dominio =[]
-            x=0
+        self.lst_links =[]
+        self.lst_69B =[]
+        lst_link_dominio =[]
+        x=0
             
-            for ref in self.resultado:
-                tag=ref.get('href')+'\n'
-                transforma="".join(map(str, tag))
-                link=[transforma.split('\n')]
-                self.lst_links.append(link)
+        for ref in self.resultado:
+            tag=ref.get('href')+'\n'
+            transforma="".join(map(str, tag))
+            link=[transforma.split('\n')]
+            self.lst_links.append(link)
                 
-            #Resguarda especialmente los links en donde se encuentre la palabra 69-B en una lista -lst_69B[]        
-            for Pos_info in self.resultado:
-                encuentra = re.findall(r'69-B', str(Pos_info))
-                if bool(encuentra)==True:
-                    PosLink = self.lst_links[x]
-                    self.lst_69B.append(PosLink)
-                
-                x+=1
+        #Resguarda especialmente los links en donde se encuentre la palabra 69-B en una lista -lst_69B[]        
+        for Pos_info in self.resultado:
+            encuentra = re.findall(self.keyword, str(Pos_info))
+            if bool(encuentra)==True:
+                PosLink = self.lst_links[x]
+                self.lst_69B.append(PosLink)
+            
+            x+=1
 
-            #Elimina carcateres innecesarios de los links y las concatena con el dominio de la pagina 
-            for Textlink in self.lst_69B:
-                cadena = Textlink[0]
-                characters = "[]'"
-                cadena = ''.join( x for x in cadena if x not in characters)
-                cal='https://www.dof.gob.mx'+cadena
-                lst_link_dominio.append(cal)
-                print(cal)
+        #Elimina carcateres innecesarios de los links y las concatena con el dominio de la pagina 
+        for Textlink in self.lst_69B:
+            cadena = Textlink[0]
+            characters = "[]'"
+            dominio=manipulacion_db.dominio_usado()
+            cadena = ''.join( x for x in cadena if x not in characters)
+            cal=dominio+cadena
+            lst_link_dominio.append(cal)
+            print(cal)
+            
+        self.conteo = len(lst_link_dominio)    
+        print("Total de link obtenidos: ", len(lst_link_dominio))
             
             
-        except:
-            self.monitoreo.gif_error_extraer_link()
-            print("Error al extraer links")
+        # except:
+        #     self.monitoreo.gif_error_extraer_link()
+        #     self.monitoreo.gif_error_fin_proceso()
+        #     print("Error al extraer links")
             
-        else:
-            print ("Extrayendo links de publicaciones realizada")
-            self.monitoreo.gif_cargando4()    
-            return lst_link_dominio    
+        # else:
+        #     print ("Extraccion de links de publicaciones realizadas")
+        #     self.monitoreo.gif_cargando4()    
+        #     return lst_link_dominio    
 
     def fecha_actual(self):
         '''
@@ -164,32 +177,35 @@ class extraccion():
         Función que valida si los links encontrados no se encuentran en la base de datos y 
         sean considerados como nuevas publicaciones
         '''
-        try:
+        # try
             
-            # Validar si la publiacion es nueva o ya ha sido almacenada en la base de datos
-            self.cont_link_dominio = 0
-            self.lst_nva_pub = []
-            self.cont_lig = 0
-            lst_link_dominio = self.obtener_link()
-            # lst_nva_pub2 = []
-            for ciclo in range(self.conteo):
-                
-                self.lst_nva_pub2 = self.manipulacionDb.consulta_links(self.lst_nva_pub, self.cont_link_dominio, lst_link_dominio)
-                self.cont_link_dominio+=1
+        # Validar si la publiacion es nueva o ya ha sido almacenada en la base de datos
+        self.cont_link_dominio = 0
+        self.lst_nva_pub = []
+        self.cont_lig = 0
+        lst_link_dominio = self.obtener_link()
+        # print(lst_link_dominio)
+        # lst_nva_pub2 = []
+        for ciclo in range(self.conteo):
             
-            #Insercion de valores en la base de datos
-            for ciclo in self.lst_nva_pub2:
-                self.manipulacionDb.insertar_links(self.lst_nva_pub2, self.fecha_actual(), self.cont_lig)
-                self.cont_lig+=1
+            self.lst_nva_pub2 = self.manipulacionDb.consulta_links(self.lst_nva_pub, self.cont_link_dominio, lst_link_dominio)
+            self.cont_link_dominio+=1
+            # print("lista nva pub2")
+            # print(self.lst_nva_pub2)
+        #Insercion de valores en la base de datos
+        for ciclo in self.lst_nva_pub2:
+            self.manipulacionDb.insertar_links(self.lst_nva_pub2, self.fecha_actual(), self.cont_lig)
+            self.cont_lig+=1
             
-            # Convertimos la lista de los links nuevos en cadena de texto
-            self.str_pubs_nva = ", \n ".join(self.lst_nva_pub2)
-        except:
-            self.monitoreo.gif_error_enviar_link()
-            print("Error al intentar insertar el link")            
-        else:
-            print("Links enviados a la base de datos")
-            self.monitoreo.gif_cargando5()
+        # Convertimos la lista de los links nuevos en cadena de texto
+        self.str_pubs_nva = ", \n ".join(self.lst_nva_pub2)
+        # except:
+        #     self.monitoreo.gif_error_enviar_link()
+        #     self.monitoreo.gif_error_fin_proceso()
+        #     print("Error al intentar insertar el link")            
+        # else:
+        #     print("Links enviados a la base de datos")
+        #     self.monitoreo.gif_cargando5()
 
     def notificacion_correo(self):
         '''
@@ -241,6 +257,7 @@ class extraccion():
                     
         except smtplib.SMTPException as e:
             self.monitoreo.gif_error_envio_correo()
+            self.monitoreo.gif_error_fin_proceso()
             print ('Error al intentar enviar el correo electronico, cuasa del error: ', e)
         else:
             print('Correo electronico enviado con exito')

@@ -120,21 +120,22 @@ class frame_botones (tk.Frame):
         '''
         self.fondo_principal.destroy()
         app=frame_monitoreo(gui= self.gui)
-        try:
+        # try:
             
-            self.extraction = extraccion()
-            self.extraction.acceso_web()
+        self.extraction = extraccion()
+        self.extraction.acceso_web()
                 # conn_bd = conexion_bd()
-            self.extraction.conn_bd()
-            self.extraction.buscar_69b()
-            self.extraction.obtener_link()
-            self.extraction.validar_pub_nva()
-            self.extraction.notificacion_correo()
-        except:
-            self.extraction.monitoreo.gif_error_fin_proceso()
-            print("Error al finalizar el proceso ")
-        else:
-            print("proceso terminado")
+        self.extraction.conn_bd()
+        self.extraction.buscar_69b()
+        self.extraction.obtener_link()
+        self.extraction.validar_pub_nva()
+        self.extraction.notificacion_correo()
+            
+        # except:
+        #     self.extraction.monitoreo.gif_error_fin_proceso()
+        #     print("Error al finalizar el proceso ")
+        # else:
+        #     print("proceso terminado")
             # self.extraction.monitoreo.gif_cargando7()
             # self.extraction.monitoreo.aceptar_resultados(app)
         # return True
