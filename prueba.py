@@ -1,17 +1,15 @@
-# from extraccion_dof import extraccion
-from tkinter import tix
 import tkinter as tk
-from tkinter import ttk
+from idlelib.tooltip import Hovertip
+import tkinter.font as tkFont
 
-ventana = tix.Tk()
-ventana.title("Globo Mensaje")
-ventana.geometry("200x200")
 
-tip = tix.Balloon(ventana)
+app = tk.Tk()
 
-aceptar = tk.Button(ventana, text="Aceptar")
-aceptar.pack(pady=50)
+myBtn = tk.Button(app,text='Ayuda')
 
-tip.bind_widget(aceptar, balloonmsg="Pulse el boton de aceptar")
+fontExample=tkFont.Font(family="Arial")
+myBtn.configure(font=fontExample)
 
-ventana.mainloop()
+myBtn.pack(pady=30)
+myTip = Hovertip(myBtn,'mexico de mis amores')
+app.mainloop()
