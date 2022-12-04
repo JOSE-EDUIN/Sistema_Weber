@@ -38,7 +38,7 @@ class frame_monitoreo (tk.LabelFrame):
         
         
     def gif_error_web(self):
-        self.lbl1 = Label(self, text="Conexion a la pagina web")
+        self.lbl1 = Label(self, text="Conexión a la pagina web")
         self.lbl1.grid(row=0,column=0,padx=20, pady=5)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
@@ -51,7 +51,7 @@ class frame_monitoreo (tk.LabelFrame):
     def gif_cargando(self):
         # self.row = row
         # self.column = column
-        self.lbl1 = Label(self, text="Conexion a la pagina web")
+        self.lbl1 = Label(self, text="Conexión a la pagina web")
         self.lbl1.grid(row=0,column=0,padx=20, pady=5)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
@@ -188,7 +188,7 @@ class frame_monitoreo (tk.LabelFrame):
 
 
     def gif_error_envio_correo(self):
-        self.lbl1 = Label(self, text="Enviando correo electronico")
+        self.lbl1 = Label(self, text="Enviando correo electrónico")
         self.lbl1.grid(row = 1, column = 2, padx=20, pady=5)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
@@ -199,7 +199,7 @@ class frame_monitoreo (tk.LabelFrame):
         
         
     def gif_cargando6(self):
-        self.lbl1 = Label(self, text="Enviando correo electronico")
+        self.lbl1 = Label(self, text="Enviando correo electrónico")
         self.lbl1.grid(row = 1, column = 2, padx=20, pady=5)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
