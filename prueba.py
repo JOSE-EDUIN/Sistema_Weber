@@ -1,15 +1,9 @@
 import tkinter as tk
-from idlelib.tooltip import Hovertip
-import tkinter.font as tkFont
-
-
-app = tk.Tk()
-
-myBtn = tk.Button(app,text='Ayuda')
-
-fontExample=tkFont.Font(family="Arial")
-myBtn.configure(font=fontExample)
-
-myBtn.pack(pady=30)
-myTip = Hovertip(myBtn,'mexico de mis amores')
-app.mainloop()
+from tkinter import ttk
+root = tk.Tk()
+root.config(width=300, height=200)
+root.title("Botón en Tk")
+img_boton = tk.PhotoImage(file="agregar.png")
+boton = ttk.Button(image=img_boton)
+boton.place(x=50, y=50)
+root.mainloop()

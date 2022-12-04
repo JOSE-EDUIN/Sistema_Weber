@@ -36,9 +36,10 @@ class configuracion():
         label_url.configure(font=fuente)
         self.lista_links()
         
-        btn_agregar=Button(self.ventana,text="Nuevo", command=self.cambio_direccion)
-        btn_agregar.grid(row=0,column=2,padx=5, pady=6, ipady=4, ipadx=8)
-        tip=Hovertip(btn_agregar,'Si desea agregar una nueva dirección web, presione este botón.')
+        img_boton = tk.PhotoImage(file="agregar.png")
+        btn_agregar=ttk.Button(self.ventana,image=img_boton, command=self.cambio_direccion)
+        btn_agregar.grid(row=0,column=2,padx=5, pady=6, ipady=2, ipadx=2)
+        tip=Hovertip(btn_agregar,'Si desea agregar una nueva dirección web, presione este botón')
         # self.boton1=tk.Button(self.ventana, text="Elegir", command=lambda:[self.boton1.destroy(),self.recuperar(), self.eliminar3()])
         # self.boton1.grid(column=0, row=2)    
         
@@ -74,7 +75,7 @@ class configuracion():
         
         btn_agregar=Button(self.ventana,text="Guardar cambios", command=self.guardar_cambios)
         btn_agregar.grid(row=5,column=2,padx=5, pady=6, ipady=4, ipadx=8)
-        tip=Hovertip(btn_agregar,'Si desea guardar los cambios realizados a los parámetros del sistema, presione este botón.')
+        tip=Hovertip(btn_agregar,'Si desea guardar los cambios realizados a los parámetros del sistema, presione este botón')
 
 
         self.ventana.mainloop()
@@ -101,6 +102,8 @@ class configuracion():
                                   textvariable=self.opcion, 
                                   values=links)
         self.combobox1.current(0)
+        self.tip=Hovertip(self.combobox1,'Puede seleccionar un link de la lista o agregar uno nuevo')
+
         self.combobox1.grid(row=0, column=1)
         fuente=tkFont.Font(family="Arial", size=10)
         self.combobox1.configure(font=fuente)
@@ -115,12 +118,15 @@ class configuracion():
                                   textvariable=self.opcion2, 
                                   values=dominios)
         self.combobox3.current(0)
+        self.tip=Hovertip(self.combobox3,'Puede seleccionar un dominio de la lista o agregar uno nuevo')
+
         fuente=tkFont.Font(family="Arial", size=10)
         self.combobox3.configure(font=fuente)
         self.combobox3.grid(row=2, column=1)
-        self.boton3=tk.Button(self.ventana, text="Nuevo", command=lambda:[self.cambiar_dominio_web()])
-        self.boton3.grid(row=2, column=2,padx=5, pady=6, ipady=4, ipadx=8)  
-        tip=Hovertip(self.boton3,'Si desea agregar un nuevo dominio web, presione este botón.')
+        self.img_boton = tk.PhotoImage(file="agregar.png")
+        self.boton3=ttk.Button(self.ventana, image=self.img_boton, command=lambda:[self.cambiar_dominio_web()])
+        self.boton3.grid(row=2, column=2,padx=5, pady=6, ipady=2, ipadx=2)  
+        tip=Hovertip(self.boton3,'Si desea agregar un nuevo dominio web, presione este botón')
 
         
         
@@ -135,7 +141,7 @@ class configuracion():
 
         btn_guardar=Button(self.ventana,text="Guardar",command=lambda:[nva_link.destroy(),btn_guardar.destroy(),manipulacion.insertar_cambio_direccion(liga.get()), self.lista_links()])
         btn_guardar.grid(row=0,column=4,padx=5, pady=6, ipady=4, ipadx=8)
-        tip=Hovertip(btn_guardar,'Si desea guardar el nuevo registro que introdujo, presione este botón.')
+        tip=Hovertip(btn_guardar,'Si desea guardar el nuevo registro que introdujo, presione este botón')
 
 
 
@@ -150,7 +156,7 @@ class configuracion():
 
         btn_guardar=Button(self.ventana,text="Guardar",command=lambda:[nva_dominio.destroy(),btn_guardar.destroy(),manipulacion.insertar_cambio_dominio(dominio.get()), self.lista_dominio()])
         btn_guardar.grid(row=2,column=4,padx=5, pady=6, ipady=4, ipadx=8)
-        tip=Hovertip(btn_guardar,'Si desea guardar el nuevo registro que introdujo, presione este botón.')
+        tip=Hovertip(btn_guardar,'Si desea guardar el nuevo registro que introdujo, presione este botón')
 
         
 
@@ -166,13 +172,15 @@ class configuracion():
                                   textvariable=self.opcion1, 
                                   values=palabras)
         self.combobox2.current(0)
+        self.tip=Hovertip(self.combobox2,'Puede seleccionar una palabra de la lista o agregar una nueva')
         fuente=tkFont.Font(family="Arial", size=10)
         self.combobox2.configure(font=fuente)
 
         self.combobox2.grid(row=1, column=1 )
-        self.boton2=tk.Button(self.ventana, text="Nuevo", command=lambda:[self.agregar_palabra()])
-        self.boton2.grid(row=1, column=2,padx=5, pady=6, ipady=4, ipadx=8) 
-        tip=Hovertip(self.boton2,'Si desea agregar una nueva palabra, presione este botón.')
+        self.img_boton2 = tk.PhotoImage(file="agregar.png")
+        self.boton2=ttk.Button(self.ventana, image=self.img_boton2, command=lambda:[self.agregar_palabra()])
+        self.boton2.grid(row=1, column=2,padx=5, pady=6, ipady=2, ipadx=2) 
+        self.tip=Hovertip(self.boton2,'Si desea agregar una nueva palabra, presione este botón')
 
 
     def aparecer_lista2(self):
@@ -208,7 +216,7 @@ class configuracion():
 
         btn_confirmar=Button(self.ventana,text="Guardar", command=lambda:[nva_palabra.destroy(), btn_confirmar.destroy(), manipulacion.insertar_palabra_nueva(palabra.get()), self.lista_palabra()])
         btn_confirmar.grid(row=1,column=4,padx=1, pady=6, ipady=4, ipadx=8)
-        tip=Hovertip(btn_confirmar,'Si desea guardar la nueva palabra que introdujo, presione este botón.')
+        tip=Hovertip(btn_confirmar,'Si desea guardar la nueva palabra que introdujo, presione este botón')
 
 
 
