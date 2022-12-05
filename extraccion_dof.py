@@ -13,6 +13,9 @@ from Base_datos_scrapper import conexion_bd
 '''
 import smtplib 
 from email.message import EmailMessage 
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from contenido_correo import firma_html
 
 
 '''
@@ -231,52 +234,60 @@ class extraccion():
         # self.contrasena_correo = "pbfbndlpwngmcdtr" #contraseña aplicacion Nasa
         # self.contrasena_correo = "poykyzptkdiihjhe" #contraseña aplicacion hotmail frester
         
-        self.mensaje = EmailMessage() 
+        self.mensaje = MIMEMultipart() 
         self.mensaje2=EmailMessage()
         self.mensaje['Subject'] = self.asunto_correo 
         self.mensaje['From'] = self.correo_remitente 
         self.mensaje['To'] = self.correo_receptor
         print(self.contrasena_correo)
+        html = firma_html()
+        # cuerpo = MIMEText(html, 'html')
+        # self.mensaje.attach(cuerpo)
         try:
                     
             if bool(self.lst_nva_pub2) == True:
-                print(f"Se ha identificado una nueva publicación referente al artículo 69-B: \n{self.str_pubs_nva}")
-                self.mensaje.set_content(f"Se ha identificado una nueva publicación referente al artículo 69-B: \n{self.str_pubs_nva}") 
-
+                mensajes = "Se ha identificado una nueva publicacion referentes al articulo 69-B"
+                # links= mensajes, 'plain'
+                self.mensaje.attach(MIMEText(mensajes, 'plain'))
+                # links = MIMEText(self.str_pubs_nva, 'plain')
+                # self.mensaje.attach(MIMEText(f"Se ha identificado una nueva publicación referente al artículo 69-B: \n{self.str_pubs_nva}")) 
+                # self.mensaje.attach(mensajes, 'plain')
                     # smtp servidor y puerto 
                 server = smtplib.SMTP('smtp.office365.com', port=587) 
                 server.ehlo() 
                 server.starttls() 
                 print("Conectando al sservidor SMTP")
-                server.login(self.correo_remitente, self.contrasena_correo) 
-                server.send_message(self.mensaje) 
+                server.login(self.correo_remitente, self.contrasena_correo)
+                 
+                server.sendmail(self.correo_remitente, [self.correo_receptor], self.mensaje.as_string()) 
+                # server.send_message(self.mensaje) 
                 server.quit()
 
-            if self.error_ejecucion == 0:
-                self.mensaje2.set_content("No se ha encontrado publicación nueva referente al articulo 69-B")
+            # if self.error_ejecucion == 0:
+            #     self.mensaje2.set_content("No se ha encontrado publicación nueva referente al articulo 69-B")
                 
-            if self.error_ejecucion == 1:
-                self.mensaje2.set_content("El sistema falló al finalizar su proceso de ejecución, revisar monitoreo")
+            # if self.error_ejecucion == 1:
+            #     self.mensaje2.set_content("El sistema falló al finalizar su proceso de ejecución, revisar monitoreo")
                 
             print(self.error_ejecucion)
             if bool(self.lst_nva_pub2) == False:
                 # print("No se ha encontrado publicación nueva referente al articulo 69-B")
                 
-                if self.error_ejecucion == 0:
-                    self.mensaje.set_content("No se ha encontrado publicación nueva referente al articulo 69-B")
-                    print(self.mensaje)
+                # if self.error_ejecucion == 0:
+                #     self.mensaje.set_content("No se ha encontrado publicación nueva referente al articulo 69-B")
+                #     print(self.mensaje)
                 
-                if self.error_ejecucion == 1:
-                    self.mensaje.set_content("El sistema falló al finalizar su proceso de ejecución, revisar monitoreo")
-                    print(self.mensaje)
-                # self.mensaje.set_content("No se ha encontrado publicación nueva referente al articulo 69-B") 
+                # if self.error_ejecucion == 1:
+                #     self.mensaje.set_content("El sistema falló al finalizar su proceso de ejecución, revisar monitoreo")
+                #     print(self.mensaje)
+                # # self.mensaje.set_content("No se ha encontrado publicación nueva referente al articulo 69-B") 
 
                 server = smtplib.SMTP('smtp.office365.com', port=587)  
                 server.ehlo() 
                 server.starttls() 
                 print("Conectando al servidor SMTP")
                 server.login(self.correo_remitente, self.contrasena_correo) 
-                server.send_message(self.mensaje) 
+                server.sendmail(self.correo_remitente, [self.correo_receptor], self.mensaje.as_string()) 
                 server.quit()
                     
         except smtplib.SMTPException as e:

@@ -76,6 +76,7 @@ class configuracion():
         manipulacion.editar_url_usado(self.combobox1.get())
         manipulacion.editar_palabra_usada(self.combobox2.get())
         manipulacion.editar_dominio_usado(self.combobox3.get())
+        self.ventana.destroy()
         
         
     def lista_links(self):
