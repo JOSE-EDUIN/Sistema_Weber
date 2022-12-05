@@ -47,7 +47,7 @@ class aparecer_gif():
     def gif_cargando():
         # self.row = row
         # self.column = column
-        lbl1 = Label(text="Conexion a la pagina web")
+        lbl1 = Label(text="Conexión a la pagina web")
         lbl1.grid(row=1,column=1,padx=1, pady=4, ipadx=20,ipady=3)
         label = ImagenLabel()
         label.grid(row=1,column=2,padx=1, pady=4, ipadx=2,ipady=3)
