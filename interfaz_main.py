@@ -7,7 +7,8 @@ from gui.pruebaframe import frame_monitoreo
 from centrarPantalla import centrar_pantalla
 def main():
     gui = tk.Tk()
-    
+    #convenio_tripartita
+    #reconocimiento de autores del sistema
     gui.title("Sistema Weber")
     gui.iconbitmap("img/weberIcon.ico")
     # gui.geometry('700x500')
@@ -19,7 +20,7 @@ def main():
     menu.barra_menu(gui, app)
     
     # monitoreo = frame_monitoreo(gui= gui)
-    centrar_pantalla(gui, 500, 725)
+    centrar_pantalla(gui, 400, 800)
     
     gui.mainloop()
     

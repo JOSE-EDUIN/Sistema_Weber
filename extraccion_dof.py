@@ -15,7 +15,10 @@ import smtplib
 from email.message import EmailMessage 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from contenido_correo import firma_html
+from contenido_correo import *
+from email.mime.base import MIMEBase
+from email import encoders
+import os.path
 
 
 '''
@@ -219,39 +222,70 @@ class extraccion():
             print("Links enviados a la base de datos")
             self.monitoreo.gif_cargando5()
 
+    
+    def actulizar_doc_links(self):
+        print("Entre en documentos")
+        texto="Articulo 69-B"
+        archivo1 = open("archivo_texto/Links_encontrados.txt", "w")
+        archivo1.write(f"Publicacion referente al {texto}.\n")
+        print(self.str_pubs_nva)
+        archivo1.write(self.str_pubs_nva)
+        archivo1.close()
+        
+        
     def notificacion_correo(self):
         '''
         Función que envia notificacion por correo electronico 
         cuando termina de realizar la consulta en la página del DOF
         '''
-        self.asunto_correo = "Publicaciones del Diario Oficial de la Federación" 
-        # self.correo_remitente = "frester_dui98@hotmail.com" 
-        self.correo_remitente = "jnahuat@nasa.com.mx"
+        self.asunto_correo = "SISTEMA WEBER: Publicaciones del Diario Oficial de la Federación" 
+        self.correo_remitente = "frester_dui98@hotmail.com"#"oaguilar@nasa.com.mx" 
+        # self.correo_remitente = "jnahuat@nasa.com.mx"
         # self.correo_receptor = "oaguilar@nasa.com.mx"
         self.correo_receptor = "frester_dui98@hotmail.com"
         self.email_smtp = "smtp.office365.com" 
-        self.contrasena_correo = self.manipulacionDb.contrasena_correo()
+        #self.contrasena_correo = "tcjdhlkgtgsjhctq"#self.manipulacionDb.contrasena_correo()
         # self.contrasena_correo = "pbfbndlpwngmcdtr" #contraseña aplicacion Nasa
-        # self.contrasena_correo = "poykyzptkdiihjhe" #contraseña aplicacion hotmail frester
+        self.contrasena_correo = "poykyzptkdiihjhe" #contraseña aplicacion hotmail frester
         
-        self.mensaje = MIMEMultipart() 
+        self.mensaje = MIMEMultipart("alternative") 
         self.mensaje2=EmailMessage()
         self.mensaje['Subject'] = self.asunto_correo 
         self.mensaje['From'] = self.correo_remitente 
         self.mensaje['To'] = self.correo_receptor
         print(self.contrasena_correo)
-        html = firma_html()
+        self.actulizar_doc_links()
+        file_location = 'archivo_texto/Links_encontrados.txt'
+        # html = firma_html()
         # cuerpo = MIMEText(html, 'html')
         # self.mensaje.attach(cuerpo)
         try:
                     
             if bool(self.lst_nva_pub2) == True:
+                # self.actulizar_doc_links()
                 mensajes = "Se ha identificado una nueva publicacion referentes al articulo 69-B"
                 # links= mensajes, 'plain'
                 self.mensaje.attach(MIMEText(mensajes, 'plain'))
                 # links = MIMEText(self.str_pubs_nva, 'plain')
                 # self.mensaje.attach(MIMEText(f"Se ha identificado una nueva publicación referente al artículo 69-B: \n{self.str_pubs_nva}")) 
                 # self.mensaje.attach(mensajes, 'plain')
+                html = msg_publicacion_html()
+                cuerpo = MIMEText(html, 'html')
+                self.mensaje.attach(cuerpo)
+                cuerpo = MIMEText(html, 'html')
+                
+                # Setup the attachment
+                filename = os.path.basename(file_location)
+                attachment = open(file_location, "rb")
+                part = MIMEBase('application', 'octet-stream')
+                part.set_payload(attachment.read())
+                encoders.encode_base64(part)
+                part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+                
+                # Attach the attachment to the MIMEMultipart object
+                self.mensaje.attach(part)
+                self.mensaje.attach(cuerpo)
+                
                     # smtp servidor y puerto 
                 server = smtplib.SMTP('smtp.office365.com', port=587) 
                 server.ehlo() 
@@ -269,18 +303,24 @@ class extraccion():
             # if self.error_ejecucion == 1:
             #     self.mensaje2.set_content("El sistema falló al finalizar su proceso de ejecución, revisar monitoreo")
                 
-            print(self.error_ejecucion)
+            # print(self.error_ejecucion)
             if bool(self.lst_nva_pub2) == False:
                 # print("No se ha encontrado publicación nueva referente al articulo 69-B")
                 
-                # if self.error_ejecucion == 0:
-                #     self.mensaje.set_content("No se ha encontrado publicación nueva referente al articulo 69-B")
-                #     print(self.mensaje)
+                if self.error_ejecucion == 0:
+                    html2 = msg_no_publicacion_html()
+                    cuerpo = MIMEText(html2, 'html')
+                    self.mensaje.attach(cuerpo)
+                    # self.mensaje.set_content("No se ha encontrado publicación nueva referente al articulo 69-B")
+                    # print(self.mensaje)
                 
-                # if self.error_ejecucion == 1:
-                #     self.mensaje.set_content("El sistema falló al finalizar su proceso de ejecución, revisar monitoreo")
-                #     print(self.mensaje)
-                # # self.mensaje.set_content("No se ha encontrado publicación nueva referente al articulo 69-B") 
+                if self.error_ejecucion == 1:
+                    html3 = msg_error_html()
+                    cuerpo = MIMEText(html3, 'html')
+                    self.mensaje.attach(cuerpo)
+                    # self.mensaje.set_content("El sistema falló al finalizar su proceso de ejecución, revisar monitoreo")
+                    # print(self.mensaje)
+                # self.mensaje.set_content("No se ha encontrado publicación nueva referente al articulo 69-B") 
 
                 server = smtplib.SMTP('smtp.office365.com', port=587)  
                 server.ehlo() 

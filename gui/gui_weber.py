@@ -6,6 +6,7 @@ from gui.monitoreo_gifs import *
 from gui.pruebaframe import frame_monitoreo
 from Base_datos_scrapper import conexion_bd
 from gui.gui_configuraciones import configuracion
+from gui.gui_ayuda import ayuda_weber
 import time
 from PIL import ImageTk, Image
 
@@ -15,12 +16,23 @@ class menu_barra():
         self.configuracion_ventana = None
         self.monitoreo = frame_monitoreo()
     
-    def archivo_nuevo_presionado(self):
+    def configuraciones_presionado(self):
         '''
         llama ventana configuraciones
         '''
+        # self.ventana_press = gui
         self.configuracion_ventana = configuracion()
+    
+    
+    def configuraciones_gui(self):
+        # self.ventana = gui
+        self.configuracion_ventana=configuracion()
         
+    
+    def ayuda_gui(self):
+        # self.ventana_padre=gui
+        self.ayuda_ventana = ayuda_weber()
+    
     def mostrar_logo(self, gui):
         '''
         Funcion para llamar el logo en ejecutar servicio
@@ -59,24 +71,25 @@ class menu_barra():
         
         menu_opciones = tk.Menu(barra_menu, tearoff= 0)
         barra_menu.add_cascade(label = "Opciones", menu = menu_opciones)
-        menu_opciones.add_command(
-            label = "Ejecutar Servicio"#,
-            # command= lambda:[self.quit_frame()]
-        )
+        # menu_opciones.add_command(
+        #     label = "Ejecutar Servicio"#,
+        #     # command= lambda:[self.quit_frame()]
+        # )
+        
         menu_opciones.add_command(
             label="Configuración del Weber",
-            accelerator="Ctrl+A",
-            command= lambda:[self.archivo_nuevo_presionado()]
+            accelerator="Ctrl+a",
+            command= lambda:[self.configuraciones_gui()]
         )
         # Asociar el atajo del teclado del menú "Nuevo".
-        gui.bind_all("<Control-a>", self.archivo_nuevo_presionado)
+        gui.bind("<Control-a>", self.configuraciones_presionado)
         menu_opciones.add_separator()
         menu_opciones.add_command(label = "Salir", command= gui.destroy )
         
         menu_ayuda = tk.Menu(barra_menu,  tearoff= 0)
         barra_menu.add_cascade(label= "Ayuda", menu= menu_ayuda)
-        menu_ayuda.add_command(label= "Ayuda")
-        menu_ayuda.add_command(label= "Version")
+        menu_ayuda.add_command(label= "Ayuda", command=self.ayuda_gui)
+        # menu_ayuda.add_command(label= "Version")
 
 
 class frame_botones (tk.Frame):
@@ -98,7 +111,7 @@ class frame_botones (tk.Frame):
         # self.config(width="25", height="500")
         
         self.fondo=Image.open("img/WeberPrincipal.jpeg")
-        self.fondo=self.fondo.resize((550,475), Image.ANTIALIAS)
+        self.fondo=self.fondo.resize((625,380), Image.ANTIALIAS) #cc475
         
         self.img_fondo=ImageTk.PhotoImage(self.fondo)
         self.fondo_principal=Label(self.gui, image=self.img_fondo)
@@ -154,7 +167,7 @@ class frame_botones (tk.Frame):
         '''
         
         self.btn_ejecutar = tk.Button(self, text="Ejecutar Servicio", command= lambda:[self.procesos()])
-        self.btn_ejecutar.grid(column=0, row=0, padx=5, pady=200)    
+        self.btn_ejecutar.grid(column=0, row=0, padx=5, pady=150)    
         self.btn_ejecutar.configure(font=("Bahnschrift SemiBold", 10), bg="PeachPuff2") 
         
         

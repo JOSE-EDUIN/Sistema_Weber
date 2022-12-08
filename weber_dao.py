@@ -68,7 +68,7 @@ class manipulacion_db():
         conexion = conexion_bd() 
         conexion.cursor.execute("SELECT `palabra` from lista_palabras;")
         wordlist = conexion.cursor.fetchall()
-        conexion.cursor.close()
+        print (wordlist)
         conexion.close_connection()
         return wordlist
 
@@ -88,6 +88,7 @@ class manipulacion_db():
         conexion = conexion_bd()
         conexion.cursor.execute("DELETE FROM `lista_palabras` WHERE `lista_palabras`.`palabra` = (%(word)s)",{"word":self.palabra}) 
         print ("Se eliminó correctamente la palabra: "+self.palabra)
+        conexion.commit_connection()
         conexion.close_connection()
         
 
@@ -117,10 +118,12 @@ class manipulacion_db():
 
 
     def eliminar_direccion(self, direccion):
-        self.direccion = direccion
+        self.url = direccion
+        # direcciones = "donde.vas.a.ir"
         conexion = conexion_bd()
-        conexion.cursor.execute("DELETE FROM `cambio_link` WHERE `cambio_link`.`link` = (%(url)s)",{"url":self.direccion}) 
-        print ("Se eliminó correctamente la dirección: "+self.direccion)
+        conexion.cursor.execute("DELETE FROM `cambio_link` WHERE `cambio_link`.`link` = (%(url)s)",{"url":self.url}) 
+        print ("Se eliminó correctamente la dirección: "+self.url)
+        conexion.commit_connection()
         conexion.close_connection()
 
 
@@ -146,6 +149,7 @@ class manipulacion_db():
         conexion = conexion_bd()
         conexion.cursor.execute("DELETE FROM `cambio_dominio` WHERE `cambio_dominio`.`dominio` = (%(domain)s)",{"domain":self.dominio}) 
         print ("Se eliminó correctamente la dirección: "+self.dominio)
+        conexion.commit_connection()
         conexion.close_connection()
 
         '''
@@ -217,10 +221,10 @@ class manipulacion_db():
         conexion.close_connection()
         return nvo_dominio
     
-    def consulta(conexion):
-        conexion = conexion_bd() 
-        conexion.cursor.execute("SELECT `palabra` from lista_palabras;")
-        wordlist = conexion.cursor.fetchall()
-        conexion.cursor.close()
-        conexion.close_connection()
-        return wordlist
+    # def consulta(conexion):
+    #     conexion = conexion_bd() 
+    #     conexion.cursor.execute("SELECT `palabra` from lista_palabras;")
+    #     wordlist = conexion.cursor.fetchall()
+    #     conexion.cursor.close()
+    #     conexion.close_connection()
+    #     return wordlist
