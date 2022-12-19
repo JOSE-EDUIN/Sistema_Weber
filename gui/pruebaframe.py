@@ -38,8 +38,8 @@ class frame_monitoreo (tk.LabelFrame):
         
         
     def gif_error_web(self):
-        self.lbl1 = Label(self, text="Conexión a la pagina web")
-        self.lbl1.grid(row=0,column=0,padx=20, pady=5)
+        self.lbl1 = tk.Label(self, text="1. Conexión a la pagina web")
+        self.lbl1.grid(row=0,column=0,padx=20, pady=5, sticky=W)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
         
@@ -51,8 +51,8 @@ class frame_monitoreo (tk.LabelFrame):
     def gif_cargando(self):
         # self.row = row
         # self.column = column
-        self.lbl1 = Label(self, text="Conexión a la pagina web")
-        self.lbl1.grid(row=0,column=0,padx=20, pady=5)
+        self.lbl1 = tk.Label(self, text="1. Conexión a la pagina web")
+        self.lbl1.grid(row=0,column=0,padx=20, pady=5, sticky=W)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
         # self.label = ImagenLabel(self)
@@ -74,8 +74,8 @@ class frame_monitoreo (tk.LabelFrame):
     
     
     def gif_error_bd(self):
-        self.lbl1 = Label(self, text="Conexión a la base de datos")
-        self.lbl1.grid(row = 1, column = 0, padx=20, pady=5)
+        self.lbl1 = Label(self, text="2. Conexión a la base de datos")
+        self.lbl1.grid(row = 1, column = 0, padx=20, pady=5, sticky=W)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
         
@@ -87,8 +87,8 @@ class frame_monitoreo (tk.LabelFrame):
     def gif_cargando2(self):
         self.row = 1
         self.column = 0
-        self.lbl1 = Label(self, text="Conexión a la base de datos")
-        self.lbl1.grid(row = 1, column = 0, padx=20, pady=5)
+        self.lbl1 = Label(self, text="2. Conexión a la base de datos")
+        self.lbl1.grid(row = 1, column = 0, padx=20, pady=5, sticky=W)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
         
@@ -104,8 +104,8 @@ class frame_monitoreo (tk.LabelFrame):
         
     
     def gif_error_busqueda_publicacion(self):
-        self.lbl1 = Label(self, text="Buscando publicación nueva")
-        self.lbl1.grid(row = 2, column = 0, padx=20, pady=5)
+        self.lbl1 = Label(self, text="3. Buscando publicación nueva")
+        self.lbl1.grid(row = 2, column = 0, padx=20, pady=5, sticky=W)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
         
@@ -115,8 +115,8 @@ class frame_monitoreo (tk.LabelFrame):
         
             
     def gif_cargando3(self):
-        self.lbl1 = Label(self, text="Buscando publicación nueva")
-        self.lbl1.grid(row = 2, column = 0, padx=20, pady=5)
+        self.lbl1 = Label(self, text="3. Buscando publicación nueva")
+        self.lbl1.grid(row = 2, column = 0, padx=20, pady=5, sticky=W)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
         
@@ -132,8 +132,8 @@ class frame_monitoreo (tk.LabelFrame):
         
     
     def gif_error_extraer_link(self):  
-        self.lbl1 = Label(self, text="Extrayendo links de publicaciones")
-        self.lbl1.grid(row = 3, column = 0, padx=20, pady=5)
+        self.lbl1 = Label(self, text="4. Extrayendo links de publicaciones")
+        self.lbl1.grid(row = 3, column = 0, padx=20, pady=5, sticky=W)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
         
@@ -143,8 +143,8 @@ class frame_monitoreo (tk.LabelFrame):
         
               
     def gif_cargando4(self):
-        self.lbl1 = Label(self, text="Extrayendo links de publicaciones")
-        self.lbl1.grid(row = 3, column = 0, padx=20, pady=5)
+        self.lbl1 = Label(self, text="4. Extrayendo links de publicaciones")
+        self.lbl1.grid(row = 3, column = 0, padx=20, pady=5, sticky=W)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
         
@@ -160,8 +160,8 @@ class frame_monitoreo (tk.LabelFrame):
         
         
     def gif_error_enviar_link(self):
-        self.lbl1 = Label(self, text="Enviando links a la base de datos")
-        self.lbl1.grid(row = 0, column = 2, padx=20, pady=5)
+        self.lbl1 = Label(self, text="5. Enviando links a la base de datos")
+        self.lbl1.grid(row = 0, column = 2, padx=20, pady=5, sticky=W)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
         
@@ -171,8 +171,8 @@ class frame_monitoreo (tk.LabelFrame):
         
             
     def gif_cargando5(self):
-        self.lbl1 = Label(self, text="Enviando links a la base de datos")
-        self.lbl1.grid(row = 0, column = 2, padx=20, pady=5)
+        self.lbl1 = Label(self, text="5. Enviando links a la base de datos")
+        self.lbl1.grid(row = 0, column = 2, padx=20, pady=5, sticky=W)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
         
@@ -188,8 +188,8 @@ class frame_monitoreo (tk.LabelFrame):
 
 
     def gif_error_envio_correo(self):
-        self.lbl1 = Label(self, text="Enviando correo electrónico")
-        self.lbl1.grid(row = 1, column = 2, padx=20, pady=5)
+        self.lbl1 = Label(self, text="6. Enviando correo electrónico")
+        self.lbl1.grid(row = 1, column = 2, padx=20, pady=5, sticky=W)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
         
@@ -199,8 +199,8 @@ class frame_monitoreo (tk.LabelFrame):
         
         
     def gif_cargando6(self):
-        self.lbl1 = Label(self, text="Enviando correo electrónico")
-        self.lbl1.grid(row = 1, column = 2, padx=20, pady=5)
+        self.lbl1 = Label(self, text="6. Enviando correo electrónico")
+        self.lbl1.grid(row = 1, column = 2, padx=20, pady=5, sticky=W)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
         
@@ -215,8 +215,8 @@ class frame_monitoreo (tk.LabelFrame):
         label_correcto.cargar_gif("correcto2.png") # nombre o ruta de la imagen
         
     def gif_error_fin_proceso(self):
-        self.lbl1 = Label(self, text="Proceso finalizado con éxito")
-        self.lbl1.grid(row = 2, column = 2, padx=20, pady=5)
+        self.lbl1 = Label(self, text="7. Proceso finalizado con éxito")
+        self.lbl1.grid(row = 2, column = 2, padx=20, pady=5, sticky=W)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
         
@@ -229,8 +229,8 @@ class frame_monitoreo (tk.LabelFrame):
         '''
         funcion para gif 7
         '''
-        self.lbl1 = Label(self, text="Proceso finalizado con éxito")
-        self.lbl1.grid(row = 2, column = 2, padx=20, pady=5)
+        self.lbl1 = Label(self, text="7. Proceso finalizado con éxito")
+        self.lbl1.grid(row = 2, column = 2, padx=20, pady=5, sticky=W)
         fuente=tkFont.Font(family="Arial", size=11)
         self.lbl1.configure(font=fuente)
         

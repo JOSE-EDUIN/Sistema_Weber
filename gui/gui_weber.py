@@ -71,18 +71,14 @@ class menu_barra():
         
         menu_opciones = tk.Menu(barra_menu, tearoff= 0)
         barra_menu.add_cascade(label = "Opciones", menu = menu_opciones)
+        #este menú funciona ppara las configuraciones del sistema        
         # menu_opciones.add_command(
-        #     label = "Ejecutar Servicio"#,
-        #     # command= lambda:[self.quit_frame()]
+        #     label="Configuración del Weber",
+        #     accelerator="Ctrl+a",
+        #     command= lambda:[self.configuraciones_gui()]
         # )
-        
-        menu_opciones.add_command(
-            label="Configuración del Weber",
-            accelerator="Ctrl+a",
-            command= lambda:[self.configuraciones_gui()]
-        )
-        # Asociar el atajo del teclado del menú "Nuevo".
-        gui.bind("<Control-a>", self.configuraciones_presionado)
+        # # Asociar el atajo del teclado del menú "Nuevo".
+        # gui.bind("<Control-a>", self.configuraciones_presionado)
         menu_opciones.add_separator()
         menu_opciones.add_command(label = "Salir", command= gui.destroy )
         
@@ -103,15 +99,15 @@ class frame_botones (tk.Frame):
         self.gui = gui 
         # self.pack(expand = 0, fill='y')
         self.config(height=500, width=30)
-        self.config(bg="lightblue")
+        self.config(bg="blue4")
         # self.pack(side="top", anchor="w")
         self.config(bd=25)
-        self.config(cursor="pirate")
+        # self.config(cursor="dotbox")
         self.grid(row=0, column=0)
         # self.config(width="25", height="500")
         
-        self.fondo=Image.open("img/WeberPrincipal.jpeg")
-        self.fondo=self.fondo.resize((625,380), Image.ANTIALIAS) #cc475
+        self.fondo=Image.open("img/nasablacklist.png")
+        self.fondo=self.fondo.resize((647,380), Image.ANTIALIAS) #cc475
         
         self.img_fondo=ImageTk.PhotoImage(self.fondo)
         self.fondo_principal=Label(self.gui, image=self.img_fondo)
@@ -168,7 +164,7 @@ class frame_botones (tk.Frame):
         
         self.btn_ejecutar = tk.Button(self, text="Ejecutar Servicio", command= lambda:[self.procesos()])
         self.btn_ejecutar.grid(column=0, row=0, padx=5, pady=150)    
-        self.btn_ejecutar.configure(font=("Bahnschrift SemiBold", 10), bg="PeachPuff2") 
+        self.btn_ejecutar.configure(font=("Bahnschrift SemiBold", 10), bg="ghost white", fg="red4") 
         
         
     

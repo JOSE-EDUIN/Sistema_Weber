@@ -25,11 +25,17 @@ class ayuda_weber():
         self.create_widgets()
         
     def create_widgets(self):
+        
+        self.titulo = Label(self.ventana, text="            Sistema de Consultas DOF       ")
+        self.titulo.config(font=("Helvetica", 10, "bold"))
+        self.titulo.grid(row=0, column=0)
+        self.titulo = Label(self.ventana, text="      Si necesita conocer mas acerca del \n      funcionamiento del sistema puede \n      consultar la siguiente:")
+        self.titulo.grid(row=1, column=0)
         self.link = Linkbutton(self.ventana,
-            text="Clic en el hipervínculo", command=self.link_clicked)
-        self.link.grid(row=0, column=0)
+            text="Documentacion del sistema", command=self.link_clicked)
+        self.link.grid(row=2, column=0)
     
     def link_clicked(self):
-        webbrowser.open("recursospython.com")
+        webbrowser.open("https://nasa.com.mx/")
         
         
