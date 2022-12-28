@@ -72,13 +72,13 @@ class menu_barra():
         menu_opciones = tk.Menu(barra_menu, tearoff= 0)
         barra_menu.add_cascade(label = "Opciones", menu = menu_opciones)
         #este menú funciona ppara las configuraciones del sistema        
-        # menu_opciones.add_command(
-        #     label="Configuración del Weber",
-        #     accelerator="Ctrl+a",
-        #     command= lambda:[self.configuraciones_gui()]
-        # )
-        # # Asociar el atajo del teclado del menú "Nuevo".
-        # gui.bind("<Control-a>", self.configuraciones_presionado)
+        menu_opciones.add_command(
+            label="Configuración del Weber",
+            accelerator="Ctrl+a",
+            command= lambda:[self.configuraciones_gui()]
+        )
+        # Asociar el atajo del teclado del menú "Nuevo".
+        gui.bind("<Control-a>", self.configuraciones_presionado)
         menu_opciones.add_separator()
         menu_opciones.add_command(label = "Salir", command= gui.destroy )
         

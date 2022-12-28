@@ -2,6 +2,7 @@ import tkinter as tk
 from gui.gui_weber import menu_barra
 from gui.gui_weber import frame_botones
 from centrarPantalla import centrar_pantalla
+
 def main():
     gui = tk.Tk()
     gui.title("Sistema de Consultas DOF")
