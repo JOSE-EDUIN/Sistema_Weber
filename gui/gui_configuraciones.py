@@ -21,92 +21,81 @@ class configuracion():
         self.ventana = Toplevel()
         self.ventana.title("Sistema Weber: Configuración")
         self.ventana.iconbitmap("img/weberIcon.ico")
-        centrar_pantalla(self.ventana, 400, 980)
+        centrar_pantalla(self.ventana, 350, 725)
         ## Provoca que la ventana tome el focus
         self.ventana.focus_set()
-          ## Deshabilita todas las otras ventanas hasta que
-        ## esta ventana sea destruida.
+        ## Deshabilita todas las otras ventanas hasta que esta ventana sea destruida.
         self.ventana.grab_set()
     
-        ## Indica que la ventana es de tipo transient, lo que significa
-        ## que la ventana aparece al frente del padre.
-        # self.ventana.transient(master=self.ventana_padre)
-        # barra_menu(self.ventana)
-          # Establecimiento de la conexión a la base de datos
+        # Establecimiento de la conexión a la base de datos
         self.manipulacion = manipulacion_db()
-        # self.wordlist = manipulacion.consulta()
-
         manipulacion2 = manipulacion_db()
         self.urlist = manipulacion2.consulta2()
-    
+        self.fuente=tkFont.Font(family="Arial Rounded MT Bold", size=11, slant="roman")
+        self.fuente_secundaria=tkFont.Font(family="Arial Rounded MT Bold", size=9, slant="roman")
+        self.img_boton3 = tk.PhotoImage(file="img/agregar.png")
+        self.img_boton_confirmar = tk.PhotoImage(file="img/confirmar.png")
+        self.img_boton_cancelar = tk.PhotoImage(file="img/cancelar.png")
+        
         #Etiquetas de configuracion url
         label_url = Label(self.ventana, text="Seleccionar URL: ")
         label_url.grid(row=0 ,column=0,padx=20, pady=20, sticky="w",ipady=6)
-        fuente=tkFont.Font(family="Arial Rounded MT Bold", size=11, slant="roman")
-        label_url.configure(font=fuente)
+        label_url.configure(font=self.fuente)
         
         self.lista_links()
         
-        self.img_boton1 = tk.PhotoImage(file="agregar.png")
+        self.img_boton1 = tk.PhotoImage(file="img/agregar.png")
         btn_agregar1=ttk.Button(self.ventana,image=self.img_boton1, command=self.cambio_direccion)
         btn_agregar1.grid(row=0,column=2,padx=8, pady=3,sticky="w")
         tip=Hovertip(btn_agregar1,'Si desea agregar una nueva dirección web, presione este botón')
         
-        self.img_boton2 = tk.PhotoImage(file="eliminar.png")
+        self.img_boton2 = tk.PhotoImage(file="img/eliminar.png")
         btn_eliminar1=ttk.Button(self.ventana,image=self.img_boton2, command=self.eliminar_url)
         btn_eliminar1.grid(row=0,column=3, pady=3,sticky="w")
         tip=Hovertip(btn_eliminar1,'Si desea eliminar una dirección web, presione este botón')
        
         #Etiquetas de configuracion palabra clave
         label_palabra = Label(self.ventana, text="Seleccionar palabra clave: ")
-        label_palabra.grid(row=1,column=0,padx=20, pady=20, sticky="w",ipady=6)
+        label_palabra.grid(row=2,column=0,padx=20, pady=20, sticky="w",ipady=6)
         fuente=tkFont.Font(family="Arial Rounded MT Bold", size=11, slant="roman")
         label_palabra.configure(font=fuente)
 
         self.lista_palabra()
         
-        self.img_boton3 = tk.PhotoImage(file="agregar.png")
+       
         self.boton2=ttk.Button(self.ventana, image=self.img_boton3, command=self.agregar_palabra)
-        self.boton2.grid(row=1, column=2,padx=8, pady=3,sticky="w") 
+        self.boton2.grid(row=2, column=2,padx=8, pady=3,sticky="w") 
         self.tip=Hovertip(self.boton2,'Si desea agregar una nueva palabra, presione este botón')
         
-        self.img_boton4 = tk.PhotoImage(file="eliminar.png")
+        self.img_boton4 = tk.PhotoImage(file="img/eliminar.png")
         btn_eliminar2=ttk.Button(self.ventana,image=self.img_boton4, command=self.eliminar_palabra_clave)
-        btn_eliminar2.grid(row=1,column=3, pady=3,sticky="w")
+        btn_eliminar2.grid(row=2,column=3, pady=3,sticky="w")
         tip=Hovertip(btn_eliminar2,'Si desea eliminar una dirección web, presione este botón')
         
         #Etiqueta de configuracion de dominio
         label_dominio=Label(self.ventana, text="Seleccionar dominio web:")
-        label_dominio.grid(row=2,column=0,padx=20, pady=20, sticky="w",ipady=6)
-        fuente=tkFont.Font(family="Arial Rounded MT Bold", size=11, slant="roman")
-        label_dominio.configure(font=fuente)
+        label_dominio.grid(row=4,column=0,padx=20, pady=20, sticky="w",ipady=6)
+        # fuente=tkFont.Font(family="Arial Rounded MT Bold", size=11, slant="roman")
+        label_dominio.configure(font=self.fuente)
 
         self.lista_dominio()
         
-        self.img_boton5 = tk.PhotoImage(file="agregar.png")
+        self.img_boton5 = tk.PhotoImage(file="img/agregar.png")
         self.boton3=ttk.Button(self.ventana, image=self.img_boton5, command=self.cambiar_dominio_web)
-        self.boton3.grid(row=2, column=2,padx=8, pady=3,sticky="w")  
+        self.boton3.grid(row=4, column=2,padx=8, pady=3,sticky="w")  
         tip=Hovertip(self.boton3,'Si desea agregar un nuevo dominio web, presione este botón')
         
-        self.img_boton6 = tk.PhotoImage(file="eliminar.png")
+        self.img_boton6 = tk.PhotoImage(file="img/eliminar.png")
         btn_eliminar3=ttk.Button(self.ventana,image=self.img_boton6, command=self.eliminar_dominio_web)
-        btn_eliminar3.grid(row=2,column=3, pady=3,sticky="w")
+        btn_eliminar3.grid(row=4,column=3, pady=3,sticky="w")
         tip=Hovertip(btn_eliminar3,'Si desea eliminar una dirección web, presione este botón')
         
         
         
         
-        label_espacio1=Label(self.ventana, text=" ")
-        label_espacio1.grid(row=3,column=1)
-        
-        label_espacio2=Label(self.ventana, text=" ")
-        label_espacio2.grid(row=4,column=1)
-        
-        label_espacio3=Label(self.ventana, text=" ")
-        label_espacio3.grid(row=5,column=1)
-        
-        label_espacio2=Label(self.ventana, text=" ")
-        label_espacio2.grid(row=6,column=0)
+                
+        # label_espacio2=Label(self.ventana, text=" ")
+        # label_espacio2.grid(row=6,column=0)
         
         frame_botones_final = ttk.Frame(self.ventana, width=500, height=50)
         frame_botones_final.grid(row=7,column=1)
@@ -206,7 +195,7 @@ class configuracion():
 
         fuente=tkFont.Font(family="Arial", size=10)
         self.combobox3.configure(font=fuente)
-        self.combobox3.grid(row=2, column=1)
+        self.combobox3.grid(row=4, column=1)
 
         
         
@@ -214,14 +203,20 @@ class configuracion():
     def cambio_direccion(self):
         liga= StringVar()
         manipulacion = manipulacion_db()   
+        label_nueva_url=Label(self.ventana, text="Agregue nueva url: ")
+        label_nueva_url.grid(row=1,column=0,padx=20, pady=20, sticky="w",ipady=6)
+        label_nueva_url.configure(font=self.fuente_secundaria)
         self.nva_link=Entry(self.ventana,bg="white",textvariable=liga)
-        self.nva_link.grid(row=0,column=4,padx=1, pady=4, ipadx=20,ipady=3)
+        self.nva_link.grid(row=1,column=1,padx=1, pady=4, ipadx=20,ipady=3, sticky=W)
         fuente=tkFont.Font(family="Arial", size=10)
         self.nva_link.configure(font=fuente)
 
-        btn_guardar=Button(self.ventana,text="Guardar",command=lambda:[self.nva_link.destroy(), btn_guardar.destroy(),manipulacion.insertar_cambio_direccion(liga.get()), self.lista_links()])
-        btn_guardar.grid(row=0,column=5,padx=5, pady=6, ipady=4, ipadx=8)
+        btn_guardar=ttk.Button(self.ventana, image=self.img_boton_confirmar, command=lambda:[btn_cancelar.destroy(), self.nva_link.destroy(), label_nueva_url.destroy(), btn_guardar.destroy(),manipulacion.insertar_cambio_direccion(liga.get()), self.lista_links()])
+        btn_guardar.grid(row=1,column=2,padx=8, pady=3,sticky="w")
+        btn_cancelar=ttk.Button(self.ventana, image=self.img_boton_cancelar, command=lambda:[self.nva_link.destroy(), label_nueva_url.destroy(), btn_cancelar.destroy(), btn_guardar.destroy()])
+        btn_cancelar.grid(row=1,column=3,pady=3,sticky="w")
         tip=Hovertip(btn_guardar,'Si desea guardar el nuevo registro que introdujo, presione este botón')
+        tip=Hovertip(btn_cancelar,'Si desea cancelar la acción, presione este botón')
 
 
 
@@ -229,14 +224,20 @@ class configuracion():
     def cambiar_dominio_web(self):
         dominio= StringVar()
         manipulacion = manipulacion_db()   
+        label_nueva_dominio=Label(self.ventana, text="Agregue nuevo dominio: ")
+        label_nueva_dominio.grid(row=5,column=0,padx=20, pady=20, sticky="w",ipady=6)
+        label_nueva_dominio.configure(font=self.fuente_secundaria)
         nva_dominio=Entry(self.ventana,bg="white",textvariable=dominio)
-        nva_dominio.grid(row=2,column=4,padx=1, pady=4, ipadx=20,ipady=3) 
+        nva_dominio.grid(row=5,column=1,padx=1, pady=4, ipadx=20,ipady=3, sticky="w") 
         fuente=tkFont.Font(family="Arial", size=10)
         nva_dominio.configure(font=fuente)
 
-        btn_guardar=Button(self.ventana,text="Guardar",command=lambda:[nva_dominio.destroy(),btn_guardar.destroy(),manipulacion.insertar_cambio_dominio(dominio.get()), self.lista_dominio()])
-        btn_guardar.grid(row=2,column=5,padx=5, pady=6, ipady=4, ipadx=8)
+        btn_guardar=ttk.Button(self.ventana, image=self.img_boton_confirmar, command=lambda:[btn_cancelar.destroy(), label_nueva_dominio.destroy(), nva_dominio.destroy(),btn_guardar.destroy(),manipulacion.insertar_cambio_dominio(dominio.get()), self.lista_dominio()])
+        btn_guardar.grid(row=5,column=2,padx=8, pady=3,sticky="w")
+        btn_cancelar=ttk.Button(self.ventana, image=self.img_boton_cancelar, command=lambda:[nva_dominio.destroy(),btn_guardar.destroy(),btn_cancelar.destroy(), label_nueva_dominio.destroy()])
+        btn_cancelar.grid(row=5,column=3,pady=3,sticky="w")
         tip=Hovertip(btn_guardar,'Si desea guardar el nuevo registro que introdujo, presione este botón')
+        tip=Hovertip(btn_cancelar,'Si desea cancelar la acción, presione este botón')
 
         
 
@@ -258,7 +259,7 @@ class configuracion():
         self.tip=Hovertip(self.combobox2,'Puede seleccionar una palabra de la lista o agregar una nueva')
         fuente=tkFont.Font(family="Arial", size=10)
         self.combobox2.configure(font=fuente)
-        self.combobox2.grid(row=1, column=1 )
+        self.combobox2.grid(row=2, column=1 )
         
 
     def aparecer_lista2(self):
@@ -290,15 +291,20 @@ class configuracion():
         '''
         palabra= StringVar()
         manipulacion = manipulacion_db()
+        label_nueva_palabra=Label(self.ventana, text="Agregue nueva palabra: ")
+        label_nueva_palabra.grid(row=3,column=0,padx=20, pady=20, sticky="w",ipady=6)
+        label_nueva_palabra.configure(font=self.fuente_secundaria)
         nva_palabra = Entry(self.ventana, bg="white", textvariable=palabra)
-        nva_palabra.grid(row=1,column=4,padx=1, pady=6, ipady=4, ipadx=8)
+        nva_palabra.grid(row=3,column=1,padx=1, pady=6, ipady=4, ipadx=8, sticky="w")
         fuente=tkFont.Font(family="Arial", size=10)
         nva_palabra.configure(font=fuente)
 
-        btn_confirmar=Button(self.ventana,text="Guardar", command=lambda:[nva_palabra.destroy(), btn_confirmar.destroy(), manipulacion.insertar_palabra_nueva(palabra.get()), self.lista_palabra()])
-        btn_confirmar.grid(row=1,column=5,padx=1, pady=6, ipady=4, ipadx=8)
-        tip=Hovertip(btn_confirmar,'Si desea guardar la nueva palabra que introdujo, presione este botón')
-
+        btn_guardar=ttk.Button(self.ventana, image=self.img_boton_confirmar, command=lambda:[btn_cancelar.destroy(), label_nueva_palabra.destroy(), nva_palabra.destroy(), btn_guardar.destroy(), manipulacion.insertar_palabra_nueva(palabra.get()), self.lista_palabra()])
+        btn_guardar.grid(row=3,column=2,padx=8, pady=3,sticky="w")
+        btn_cancelar=ttk.Button(self.ventana, image=self.img_boton_cancelar, command=lambda:[label_nueva_palabra.destroy(), nva_palabra.destroy(), btn_cancelar.destroy(), btn_guardar.destroy()])
+        btn_cancelar.grid(row=3,column=3,pady=3,sticky="w")
+        tip=Hovertip(btn_guardar,'Si desea guardar la nueva palabra que introdujo, presione este botón')
+        tip=Hovertip(btn_cancelar,'Si desea cancelar la acción, presione este botón')
 
 
   

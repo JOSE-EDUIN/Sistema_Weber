@@ -45,7 +45,7 @@ class frame_monitoreo (tk.LabelFrame):
         
         label2 = ImagenLabel(self)
         label2.grid(row=0,column=1,padx=1, pady=4, ipadx=2,ipady=3)
-        label2.cargar_gif("incorrecto.png") # nombre o ruta de la imagen
+        label2.cargar_gif("img/incorrecto.png") # nombre o ruta de la imagen
 
 
     def gif_cargando(self):
@@ -62,7 +62,7 @@ class frame_monitoreo (tk.LabelFrame):
         # cargamos gif loading
         label2 = ImagenLabel(self)
         label2.grid(row=0,column=1,padx=1, pady=4, ipadx=2,ipady=3)
-        label2.cargar_gif("loading.gif") # nombre o ruta de la imagen
+        label2.cargar_gif("img/loading.gif") # nombre o ruta de la imagen
 
         #Destruimos el label
         label2.after(1000, label2.destroy())
@@ -70,7 +70,7 @@ class frame_monitoreo (tk.LabelFrame):
         #creamos imagen finalizado para la anterior funcion
         label_correcto = ImagenLabel(self)
         label_correcto.grid(row=0,column=1,padx=1, pady=4, ipadx=2,ipady=3)
-        label_correcto.cargar_gif("correcto2.png") # nombre o ruta de la imagen
+        label_correcto.cargar_gif("img/correcto2.png") # nombre o ruta de la imagen
     
     
     def gif_error_bd(self):
@@ -81,7 +81,7 @@ class frame_monitoreo (tk.LabelFrame):
         
         label = ImagenLabel(self)
         label.grid(row=1,column=1,padx=1, pady=4, ipadx=2,ipady=3)
-        label.cargar_gif("incorrecto.png") # nombre o ruta de la imagen
+        label.cargar_gif("img/incorrecto.png") # nombre o ruta de la imagen
         
         
     def gif_cargando2(self):
@@ -94,13 +94,13 @@ class frame_monitoreo (tk.LabelFrame):
         
         label = ImagenLabel(self)
         label.grid(row=1,column=1,padx=1, pady=4, ipadx=2,ipady=3)
-        label.cargar_gif("loading.gif") # nombre o ruta de la imagen
+        label.cargar_gif("img/loading.gif") # nombre o ruta de la imagen
         
         label.after(1000, label.destroy())
         
         label_correcto = ImagenLabel(self)
         label_correcto.grid(row=1,column=1,padx=1, pady=4, ipadx=2,ipady=3)
-        label_correcto.cargar_gif("correcto2.png") # nombre o ruta de la imagen
+        label_correcto.cargar_gif("img/correcto2.png") # nombre o ruta de la imagen
         
     
     def gif_error_busqueda_publicacion(self):
@@ -111,7 +111,7 @@ class frame_monitoreo (tk.LabelFrame):
         
         label = ImagenLabel(self)
         label.grid(row=2,column=1,padx=1, pady=4, ipadx=2,ipady=3)
-        label.cargar_gif("incorrecto.png") # nombre o ruta de la imagen
+        label.cargar_gif("img/incorrecto.png") # nombre o ruta de la imagen
         
             
     def gif_cargando3(self):
@@ -122,13 +122,13 @@ class frame_monitoreo (tk.LabelFrame):
         
         label = ImagenLabel(self)
         label.grid(row=2,column=1,padx=1, pady=4, ipadx=2,ipady=3)
-        label.cargar_gif("loading.gif") # nombre o ruta de la imagen
+        label.cargar_gif("img/loading.gif") # nombre o ruta de la imagen
         
         label.after(1000, label.destroy())
         
         label_correcto = ImagenLabel(self)
         label_correcto.grid(row=2,column=1,padx=1, pady=4, ipadx=2,ipady=3)
-        label_correcto.cargar_gif("correcto2.png") # nombre o ruta de la imagen
+        label_correcto.cargar_gif("img/correcto2.png") # nombre o ruta de la imagen
         
     
     def gif_error_extraer_link(self):  
@@ -139,7 +139,7 @@ class frame_monitoreo (tk.LabelFrame):
         
         label = ImagenLabel(self)
         label.grid(row=3,column=1,padx=1, pady=4, ipadx=2,ipady=3)
-        label.cargar_gif("incorrecto.png") # nombre o ruta de la imagen
+        label.cargar_gif("img/incorrecto.png") # nombre o ruta de la imagen
         
               
     def gif_cargando4(self):
@@ -150,13 +150,13 @@ class frame_monitoreo (tk.LabelFrame):
         
         label = ImagenLabel(self)
         label.grid(row=3,column=1,padx=1, pady=4, ipadx=2,ipady=3)
-        label.cargar_gif("loading.gif") # nombre o ruta de la imagen
+        label.cargar_gif("img/loading.gif") # nombre o ruta de la imagen
         
         label.after(1000, label.destroy())
         
         label_correcto = ImagenLabel(self)
         label_correcto.grid(row=3,column=1,padx=1, pady=4, ipadx=2,ipady=3)
-        label_correcto.cargar_gif("correcto2.png") # nombre o ruta de la imagen
+        label_correcto.cargar_gif("img/correcto2.png") # nombre o ruta de la imagen
         
         
     def gif_error_enviar_link(self):
@@ -167,7 +167,7 @@ class frame_monitoreo (tk.LabelFrame):
         
         label = ImagenLabel(self)
         label.grid(row=0,column=3,padx=1, pady=4, ipadx=2,ipady=3)
-        label.cargar_gif("incorrecto.png") # nombre o ruta de la imagen
+        label.cargar_gif("img/incorrecto.png") # nombre o ruta de la imagen
         
             
     def gif_cargando5(self):
@@ -178,13 +178,13 @@ class frame_monitoreo (tk.LabelFrame):
         
         label = ImagenLabel(self)
         label.grid(row=0,column=3,padx=1, pady=4, ipadx=2,ipady=3)
-        label.cargar_gif("loading.gif") # nombre o ruta de la imagen
+        label.cargar_gif("img/loading.gif") # nombre o ruta de la imagen
         
         label.after(1000, label.destroy())
         
         label_correcto = ImagenLabel(self)
         label_correcto.grid(row=0,column=3,padx=1, pady=4, ipadx=2,ipady=3)
-        label_correcto.cargar_gif("correcto2.png") # nombre o ruta de la imagen
+        label_correcto.cargar_gif("img/correcto2.png") # nombre o ruta de la imagen
 
 
     def gif_error_envio_correo(self):
@@ -195,7 +195,7 @@ class frame_monitoreo (tk.LabelFrame):
         
         label = ImagenLabel(self)
         label.grid(row=1,column=3,padx=1, pady=4, ipadx=2,ipady=3)
-        label.cargar_gif("incorrecto.png") # nombre o ruta de la imagen
+        label.cargar_gif("img/incorrecto.png") # nombre o ruta de la imagen
         
         
     def gif_cargando6(self):
@@ -206,13 +206,13 @@ class frame_monitoreo (tk.LabelFrame):
         
         label = ImagenLabel(self)
         label.grid(row=1,column=3,padx=1, pady=4, ipadx=2,ipady=3)
-        label.cargar_gif("loading.gif") # nombre o ruta de la imagen
+        label.cargar_gif("img/loading.gif") # nombre o ruta de la imagen
         
         label.after(1000, label.destroy())
         
         label_correcto = ImagenLabel(self)
         label_correcto.grid(row=1,column=3,padx=1, pady=4, ipadx=2,ipady=3)
-        label_correcto.cargar_gif("correcto2.png") # nombre o ruta de la imagen
+        label_correcto.cargar_gif("img/correcto2.png") # nombre o ruta de la imagen
         
     def gif_error_fin_proceso(self):
         self.lbl1 = Label(self, text="7. Proceso finalizado con éxito")
@@ -222,7 +222,7 @@ class frame_monitoreo (tk.LabelFrame):
         
         label = ImagenLabel(self)
         label.grid(row=2,column=3,padx=1, pady=4, ipadx=2,ipady=3)
-        label.cargar_gif("incorrecto.png") # nombre o ruta de la imagen
+        label.cargar_gif("img/incorrecto.png") # nombre o ruta de la imagen
         
             
     def gif_cargando7(self):
@@ -236,13 +236,13 @@ class frame_monitoreo (tk.LabelFrame):
         
         label = ImagenLabel(self)
         label.grid(row=2,column=3,padx=1, pady=4, ipadx=2,ipady=3)
-        label.cargar_gif("loading.gif") # nombre o ruta de la imagen
+        label.cargar_gif("img/loading.gif") # nombre o ruta de la imagen
         
         label.after(1000, label.destroy())
         
         label_correcto = ImagenLabel(self)
         label_correcto.grid(row=2,column=3,padx=1, pady=4, ipadx=2,ipady=3)
-        label_correcto.cargar_gif("correcto2.png") # nombre o ruta de la imagen
+        label_correcto.cargar_gif("img/correcto2.png") # nombre o ruta de la imagen
         
     def gif_cargando8(self):
         '''
@@ -255,7 +255,7 @@ class frame_monitoreo (tk.LabelFrame):
         
         label = ImagenLabel(self)
         label.grid(row=2,column=3,padx=1, pady=4, ipadx=2,ipady=3)
-        label.cargar_gif("loading.gif") # nombre o ruta de la imagen
+        label.cargar_gif("img/loading.gif") # nombre o ruta de la imagen
         
         # label.after(1000, label.destroy())            
         # label_correcto = ImagenLabel(self)
